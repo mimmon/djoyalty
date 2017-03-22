@@ -36,7 +36,7 @@ class SpendingTxnManager(models.Manager):
 class Txn(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     customer = models.ForeignKey('Customer', related_name='transactions')
-    value = models.DecimalField()
+    value = models.DecimalField(decimal_places=2, max_digits=7)
     is_discount = models.BooleanField(default=False)
 
     objects = models.Manager()
@@ -55,8 +55,8 @@ class CustomerRelatedEvtManager(models.Manager):
 
 class Event(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
-    customer = models.ForeignKey('Customer', related_name='transactions', null=True, blank=True)
-    action = models.CharField()
+    customer = models.ForeignKey('Customer', related_name='events', null=True, blank=True)
+    action = models.CharField(max_length=128)
     description = models.DateTimeField(null=True, blank=True)
 
     objects = models.Manager()
