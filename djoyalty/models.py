@@ -28,6 +28,11 @@ class DiscountedTxnManager(models.Manager):
         return super(DiscountedTxnManager, self).get_queryset().filter(is_discount=True)
 
 
+class SpendingTxnManager(models.Manager):
+    def get_queryset(self):
+        return super(SpendingTxnManager, self).get_queryset().filter(value_lt=0)
+
+
 class Txn(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     customer = models.ForeignKey('Customer', related_name='transactions')
@@ -37,6 +42,7 @@ class Txn(models.Model):
     objects = models.Manager()
     txn_full = FullPriceTxnManager()
     txn_discount = DiscountedTxnManager()
+    spending = SpendingTxnManager()
 
     def __str__(self):
         return '{}{}@{} by {}'.format(self.value, '[X]' if self.is_discount else '', self.timestamp, self.customer)
