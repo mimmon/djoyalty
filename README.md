@@ -19,10 +19,10 @@ Purchase 3: customer buys goods for 100 EUR. Asks for 10% discount. Pays 90 EUR.
 At the next visit customer has 10 credits and is not entitled for discount.
 
 ## Technical details
-- Models:
--- Customer
--- Txn (transactions)
--- Event
+### Models:
+- Customer
+- Txn (transactions)
+- Event
 
 ** Customer **
 The model stores customer details: name, address, contact + additional
